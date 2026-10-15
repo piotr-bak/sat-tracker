@@ -4,6 +4,7 @@ import { CsvError } from "./types/errors";
 import { ok, err, Result } from "./types/result";
 import { OmmRecord, OmmSchema } from './schemas';
 import { IntegrityError } from './types/errors';
+import { ROWS_MIN, ROWS_MAX, DROPPED_RATIO_MAX } from './constants';
 
 export async function fetchCelesTrakData(): Promise<string> {    
     const baseUrl = process.env.CELESTRAK_BASE_URL;
@@ -28,9 +29,6 @@ export async function fetchCelesTrakData(): Promise<string> {
 
     return response.text();
 }
-
-
-const ROWS_MAX = 100_000;
 
 export function parseCsv(csv: string, required: readonly string[]): Result<readonly unknown[], CsvError> {
     const parsed = Papa.parse<unknown>(csv, {
@@ -82,9 +80,6 @@ export function validate(data: readonly unknown[]): ValidatedCelesTrakData {
         droppedCount: droppedCount
     }
 }
-
-const ROWS_MIN = 1000
-const DROPPED_RATIO_MAX = 0.02
 
 export function checkIntegrity(data: ValidatedCelesTrakData): Result<ValidatedCelesTrakData, IntegrityError> {
     const rowCount = data.rows.length;
