@@ -1,3 +1,4 @@
+import 'server-only';
 import Papa from 'papaparse';
 import {z} from 'zod';
 import { CsvError } from "./types/errors";
