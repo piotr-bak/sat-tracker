@@ -4,7 +4,7 @@ import { CsvError } from "./types/errors";
 import { ok, err, Result } from "./types/result";
 import { OmmRecord, OmmSchema } from './schemas';
 import { IntegrityError } from './types/errors';
-import { ROWS_MIN, ROWS_MAX, DROPPED_RATIO_MAX } from './constants';
+import { ROWS_MIN, ROWS_MAX, DROPPED_RATIO_MAX, FETCH_TIMEOUT_MS } from './constants';
 
 export async function fetchCelesTrakData(): Promise<string> {    
     const baseUrl = process.env.CELESTRAK_BASE_URL;
@@ -19,11 +19,22 @@ export async function fetchCelesTrakData(): Promise<string> {
     url.searchParams.set('GROUP', 'active');
     url.searchParams.set('FORMAT', 'csv');
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+        cache: "no-store",
+        redirect: "manual",
+        signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+        headers: { "User-Agent": "sat-tracker-demo (github.com/piotr-bak)"}
+    });
 
-    if (!response.ok) {
+    // status != 200 instead of !ok is to match CelesTrak rule 
+    // to stop on anything but 200. `ok` would also accept 204 etc.
+    if (response.status !== 200) { 
+
+        // 403 form CelesTrak may include a sentence explaining the reason why getting blocked. 
+        // Keeping first characters of the sentence could give something to act upon
+        const hint = (await response.text()).slice(0, 250);
         throw new Error(
-            `Failed to fetch CelesTrak data. Error ${response.status}: ${response.statusText}`
+            `CelesTrak responded with Status ${response.status}: ${hint}`
         )
     }
 
