@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vercel/blob": "^2.8.1",
+    "@vercel/config": "^0.12.0",
     "next": "16.4.0",
     "papaparse": "^5.7.0",
     "react": "19.3.0",
