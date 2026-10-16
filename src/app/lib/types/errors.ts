@@ -38,3 +38,12 @@ export type BlobStoreError =
         readonly kind: "blob_invalid_snapshot";
         readonly issues: readonly string[];
     }
+
+export type RefreshError =
+    | {
+      readonly kind: "upstream_failed";
+      readonly message: string;
+    }
+    | CsvError 
+    | IntegrityError 
+    | BlobStoreError
