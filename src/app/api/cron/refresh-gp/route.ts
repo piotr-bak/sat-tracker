@@ -1,4 +1,4 @@
-import { refreshSnapshot } from "@/app/lib/blob-store";
+import { refreshSnapshot } from "@/app/lib/refreshSnapshot";
 import { connection } from "next/server";
 
 export async function GET(request: Request): Promise<Response> {
