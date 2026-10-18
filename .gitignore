@@ -12,6 +12,7 @@
 
 # fixtures
 /fixtures
+/public/dev-data/
 
 # testing
 /coverage
