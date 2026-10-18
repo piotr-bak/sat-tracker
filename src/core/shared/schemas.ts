@@ -15,8 +15,8 @@ export const OmmSchema = z.object({
     MEAN_ANOMALY: z.coerce.number().min(0).max(360),
 
     // TLE-related
-    EPHEMERIS_TYPE: z.coerce.number().int().nonnegative(),
-    CLASSIFICATION_TYPE: z.enum(["U", "C", "S"]),
+    EPHEMERIS_TYPE: z.coerce.number().pipe(z.literal(0)),
+    CLASSIFICATION_TYPE: z.enum(["U", "C"]),
     NORAD_CAT_ID: z.coerce.number().int().positive(),
     ELEMENT_SET_NO: z.coerce.number().int().nonnegative(),
     REV_AT_EPOCH: z.coerce.number().int().nonnegative(),
