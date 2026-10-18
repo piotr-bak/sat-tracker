@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { OmmRecord, OmmSchema } from "./schemas";
-import { err, ok, Result } from "../result";
-import { IntegrityError } from "./errors";
-import { ValidatedOmmRows } from "./types";
+import { type OmmRecord, OmmSchema } from "./schemas";
+import { err, ok, type Result } from "../result";
+import type { IntegrityError } from "./errors";
+import type { ValidatedOmmRows } from "./types";
 import { DROPPED_RATIO_MAX, ROWS_MIN } from "../constants";
 
 export function validate(data: readonly unknown[]): ValidatedOmmRows {

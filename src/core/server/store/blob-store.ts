@@ -1,9 +1,9 @@
 import "server-only";
 import { z } from "zod";
-import { err, ok, Result } from "@/core/shared/result";
-import { Snapshot, SnapshotSchema } from "./schemas";
+import { err, ok, type Result } from "@/core/shared/result";
+import { type Snapshot, SnapshotSchema } from "./schemas";
 import { BlobNotFoundError, head, put } from "@vercel/blob";
-import { BlobStoreError } from "@/core/server/errors";
+import type { BlobStoreError } from "@/core/server/errors";
 
 // The below defined here and not in the constants.ts in order
 // not to drag a server env variable into code the browser imports

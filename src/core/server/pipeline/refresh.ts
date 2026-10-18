@@ -3,10 +3,10 @@ import { writeSnapshot } from "../store/blob-store";
 import { parseCsv } from "./parse";
 import { fetchCelesTrakData } from "./fetch";
 import { OmmSchema } from "@/core/shared/omm/schemas";
-import { RefreshError } from "../errors";
-import { Result, err, ok } from "../../shared/result";
+import { err, ok, type Result } from "../../shared/result";
 import { checkIntegrity, validate } from "@/core/shared/omm/validation";
-import { Snapshot } from "../store/schemas";
+import type { Snapshot } from "../store/schemas";
+import type { RefreshError } from "../errors";
 
 export async function refreshSnapshot(): Promise<
     Result<
