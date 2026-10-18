@@ -1,10 +1,11 @@
 import "server-only";
 import { writeSnapshot } from "../blob/blob-store";
-import { parseCsv, checkIntegrity, validate } from "../celestrak/ingest";
+import { parseCsv } from "../celestrak/ingest";
 import { fetchCelesTrakData } from "../celestrak/fetch";
 import { OmmSchema, Snapshot } from "@/core/shared/schemas";
 import { RefreshError } from "../errors";
 import { Result, err, ok } from "../../shared/result";
+import { checkIntegrity, validate } from "@/core/shared/omm/validation";
 
 export async function refreshSnapshot(): Promise<
     Result<
