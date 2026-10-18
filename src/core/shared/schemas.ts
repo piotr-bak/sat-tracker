@@ -1,10 +1,10 @@
-import {z} from 'zod';
-import { ROWS_MAX } from './constants';
+import { z } from "zod";
+import { ROWS_MAX } from "./constants";
 
 export const OmmSchema = z.object({
     OBJECT_NAME: z.string().min(1),
     OBJECT_ID: z.string(),
-    EPOCH: z.iso.datetime({local: true, offset: true}),
+    EPOCH: z.iso.datetime({ local: true, offset: true }),
 
     // Orbital elements
     MEAN_MOTION: z.coerce.number().positive(),
@@ -16,7 +16,7 @@ export const OmmSchema = z.object({
 
     // TLE-related
     EPHEMERIS_TYPE: z.coerce.number().int().nonnegative(),
-    CLASSIFICATION_TYPE: z.enum(['U', 'C', 'S']),
+    CLASSIFICATION_TYPE: z.enum(["U", "C", "S"]),
     NORAD_CAT_ID: z.coerce.number().int().positive(),
     ELEMENT_SET_NO: z.coerce.number().int().nonnegative(),
     REV_AT_EPOCH: z.coerce.number().int().nonnegative(),
@@ -30,7 +30,7 @@ export type OmmRecord = z.infer<typeof OmmSchema>;
 export const SnapshotSchema = z.object({
     schemaVer: z.literal(1),
     fetchedAtMs: z.number().int().positive(),
-    rows: z.array(OmmSchema).max(ROWS_MAX)
+    rows: z.array(OmmSchema).max(ROWS_MAX),
 });
 
 export type Snapshot = z.infer<typeof SnapshotSchema>;

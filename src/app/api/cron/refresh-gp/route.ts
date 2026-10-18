@@ -1,4 +1,4 @@
-import { refreshSnapshot } from "@/app/lib/refresh";
+import { refreshSnapshot } from "@/core/server/pipeline/refresh";
 import { connection } from "next/server";
 
 export async function GET(request: Request): Promise<Response> {
