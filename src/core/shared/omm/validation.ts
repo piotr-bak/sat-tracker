@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { OmmRecord, OmmSchema } from "../schemas";
+import { OmmRecord, OmmSchema } from "./schemas";
 import { err, ok, Result } from "../result";
-import { IntegrityError } from "@/core/server/errors";
+import { IntegrityError } from "./errors";
 import { ValidatedOmmRows } from "./types";
 import { DROPPED_RATIO_MAX, ROWS_MIN } from "../constants";
 

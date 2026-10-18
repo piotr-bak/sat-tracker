@@ -1,7 +1,7 @@
 import "server-only";
 import { z } from "zod";
 import { err, ok, Result } from "@/core/shared/result";
-import { Snapshot, SnapshotSchema } from "@/core/shared/schemas";
+import { Snapshot, SnapshotSchema } from "./schemas";
 import { BlobNotFoundError, head, put } from "@vercel/blob";
 import { BlobStoreError } from "@/core/server/errors";
 

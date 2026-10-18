@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { ROWS_MAX } from "./constants";
 
 export const OmmSchema = z.object({
     OBJECT_NAME: z.string().min(1),
@@ -26,11 +25,3 @@ export const OmmSchema = z.object({
 });
 
 export type OmmRecord = z.infer<typeof OmmSchema>;
-
-export const SnapshotSchema = z.object({
-    schemaVer: z.literal(1),
-    fetchedAtMs: z.number().int().positive(),
-    rows: z.array(OmmSchema).max(ROWS_MAX),
-});
-
-export type Snapshot = z.infer<typeof SnapshotSchema>;

@@ -1,6 +1,6 @@
 import { FETCH_TIMEOUT_MS } from "@/core/shared/constants";
 import { err, ok, Result } from "@/core/shared/result";
-import { OmmRecord } from "@/core/shared/schemas";
+import { OmmRecord } from "@/core/shared/omm/schemas";
 import {
     degreesLat,
     degreesLong,
@@ -98,3 +98,5 @@ function computeFrame(satRecData: readonly SatRec[], epoch: Date): Frame {
 
     return { satPositions, visibilityMask, failedPropagationCount };
 }
+
+function loadSnapshot() {}

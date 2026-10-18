@@ -1,7 +1,7 @@
 import "server-only";
 import Papa from "papaparse";
 import { CsvError } from "../errors";
-import { ok, err, Result } from "../../shared/result";
+import { ok, err, Result } from "../../shared/helpers";
 import { ROWS_MAX } from "../../shared/constants";
 
 export function parseCsv(

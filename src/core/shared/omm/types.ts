@@ -1,3 +1,3 @@
-import { OmmRecord } from "../schemas";
+import { OmmRecord } from "./schemas";
 
 export type ValidatedOmmRows = { rows: OmmRecord[]; droppedCount: number };
