@@ -9,15 +9,15 @@
         "lint": "eslint"
     },
     "dependencies": {
-        "@vercel/blob": "^2.8.1",
+        "@vercel/blob": "^2.8.2",
         "@vercel/config": "^0.12.0",
-        "next": "16.4.0",
+        "next": "16.4.2",
         "papaparse": "^5.7.0",
-        "react": "19.3.0",
-        "react-dom": "19.3.0",
+        "react": "19.3.1",
+        "react-dom": "19.3.1",
         "satellite.js": "^7.1.0",
         "server-only": "^0.0.1",
-        "zod": "^4.6.6"
+        "zod": "^4.6.7"
     },
     "devDependencies": {
         "@types/node": "^26",
@@ -27,9 +27,9 @@
         "@typescript/native": "npm:typescript@^7.0.2",
         "babel-plugin-react-compiler": "1.0.0",
         "eslint": "^10",
-        "eslint-config-next": "16.4.0",
+        "eslint-config-next": "16.4.2",
         "eslint-plugin-perfectionist": "^5.12.1",
         "typescript": "npm:@typescript/typescript6@^6.0.2"
     },
-    "packageManager": "pnpm@12.11.2"
+    "packageManager": "pnpm@12.14.0"
 }
