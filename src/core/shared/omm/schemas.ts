@@ -34,7 +34,7 @@ const snapshotSchemaOf = <Row extends z.ZodType>(row: Row) =>
         rows: z.array(row).max(ROWS_MAX),
     });
 
-export const SnapshoEnvelopetSchema = snapshotSchemaOf(z.unknown());
+export const SnapshotEnvelopeSchema = snapshotSchemaOf(z.unknown());
 export const SnapshotSchema = snapshotSchemaOf(OmmSchema);
 
 export type Snapshot = z.infer<typeof SnapshotSchema>;
