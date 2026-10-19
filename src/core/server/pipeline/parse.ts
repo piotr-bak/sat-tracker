@@ -1,8 +1,8 @@
 import "server-only";
-import Papa from "papaparse";
-import { ok, err, type Result } from "../../shared/result";
-import { ROWS_MAX } from "../../shared/constants";
 import type { CsvError } from "../errors";
+import Papa from "papaparse";
+import { ROWS_MAX } from "../../shared/constants";
+import { type Result, err, ok } from "../../shared/result";
 
 export function parseCsv(
     csv: string,
@@ -19,25 +19,25 @@ export function parseCsv(
         (error) => error.type !== "FieldMismatch",
     );
     if (structuralErr.length > 0)
-        return err({
+        {return err({
             kind: "csv_malformed",
             issues: structuralErr.map((error) => error.message),
-        });
+        });}
 
     const missingCol = required.filter(
         (name) => !parsed.meta.fields?.includes(name),
     );
     if (missingCol.length > 0)
-        return err({
+        {return err({
             kind: "csv_missing_columns",
             columns: missingCol,
-        });
+        });}
 
     if (parsed.data.length > ROWS_MAX)
-        return err({
+        {return err({
             kind: "csv_too_many_rows",
             rowsMax: ROWS_MAX,
-        });
+        });}
 
     return ok(parsed.data);
 }

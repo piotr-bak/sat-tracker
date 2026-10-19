@@ -1,20 +1,20 @@
-import type { OmmRecord } from "@/core/shared/omm/schemas";
 import type {
     Frame,
     ProcessedSatRecData,
     SatRecProcessingError,
 } from "./protocol";
-import { err, ok, type Result } from "@/core/shared/result";
+import type { OmmRecord } from "@/core/shared/omm/schemas";
 import {
+    type SatRec,
     degreesLat,
     degreesLong,
     eciToGeodetic,
     gstime,
     json2satrec,
     propagate,
-    SatRec,
     SatRecError,
 } from "satellite.js";
+import { type Result, err, ok } from "@/core/shared/result";
 
 export function buildSatelliteRecords(
     data: readonly OmmRecord[],

@@ -1,9 +1,9 @@
 import "server-only";
-import { z } from "zod";
-import { err, ok, type Result } from "@/core/shared/result";
-import { type Snapshot, SnapshotSchema } from "./schemas";
-import { BlobNotFoundError, head, put } from "@vercel/blob";
 import type { BlobStoreError } from "@/core/server/errors";
+import { BlobNotFoundError, head, put } from "@vercel/blob";
+import { z } from "zod";
+import { type Result, err, ok } from "@/core/shared/result";
+import { type Snapshot, SnapshotSchema } from "./schemas";
 
 // The below defined here and not in the constants.ts in order
 // not to drag a server env variable into code the browser imports
@@ -19,10 +19,10 @@ export async function readSnapshot(): Promise<
         const response = await fetch(meta.url, { cache: "no-store" });
 
         if (!response.ok)
-            return err({
+            {return err({
                 kind: "blob_read_failed",
                 cause: new Error(`HTTP ${response.status}`),
-            });
+            });}
 
         json = await response.json();
     } catch (cause) {

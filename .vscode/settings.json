@@ -2,5 +2,6 @@
     "sonarlint.connectedMode.project": {
         "connectionId": "piotr-bak",
         "projectKey": "piotr-bak_sat-tracker"
-    }
+    },
+    "remote.autoForwardPortsFallback": 0
 }

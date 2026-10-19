@@ -1,9 +1,9 @@
-import { z } from "zod";
-import { type OmmRecord, OmmSchema } from "./schemas";
-import { err, ok, type Result } from "../result";
-import type { IntegrityError } from "./errors";
-import type { ValidatedOmmRows } from "./types";
-import { DROPPED_RATIO_MAX, ROWS_MIN } from "../constants";
+import type { IntegrityError } from './errors';
+import type { ValidatedOmmRows } from './types';
+import { z } from 'zod';
+import { DROPPED_RATIO_MAX, ROWS_MIN } from '../constants';
+import { type Result, err, ok } from '../result';
+import { type OmmRecord, OmmSchema } from './schemas';
 
 export function validate(data: readonly unknown[]): ValidatedOmmRows {
     const rows: OmmRecord[] = [];
@@ -34,7 +34,7 @@ export function checkIntegrity(
 
     if (rowCount < ROWS_MIN) {
         return err({
-            kind: "integrity_row_count_too_low",
+            kind: 'integrity_row_count_too_low',
             rowCount,
             min: ROWS_MIN,
         });
@@ -42,7 +42,7 @@ export function checkIntegrity(
 
     if (data.droppedCount / total > DROPPED_RATIO_MAX) {
         return err({
-            kind: "integrity_too_many_dropped",
+            kind: 'integrity_too_many_dropped',
             droppedCount: data.droppedCount,
             total,
             ratioMax: DROPPED_RATIO_MAX,

@@ -1,5 +1,5 @@
 export class AssertionError extends Error {
-    "name": "Assertion Error";
+    'name': 'Assertion Error';
 }
 
 export function assert(condition: unknown, message: string): asserts condition {

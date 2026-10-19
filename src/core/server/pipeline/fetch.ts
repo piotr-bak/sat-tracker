@@ -1,5 +1,5 @@
-import { FETCH_TIMEOUT_MS } from "@/core/shared/constants";
 import { readFile } from "node:fs/promises";
+import { FETCH_TIMEOUT_MS } from "@/core/shared/constants";
 
 export async function fetchCelesTrakData(): Promise<string> {
     // Prevent local runs from calling the real CelesTrak endpoint

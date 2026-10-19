@@ -1,5 +1,5 @@
-import { refreshSnapshot } from "@/core/server/pipeline/refresh";
 import { connection } from "next/server";
+import { refreshSnapshot } from "@/core/server/pipeline/refresh";
 
 export async function GET(request: Request): Promise<Response> {
     await connection();
