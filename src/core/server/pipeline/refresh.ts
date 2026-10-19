@@ -1,12 +1,12 @@
-import "server-only";
-import type { RefreshError } from "../errors";
-import type { Snapshot } from "../store/schemas";
-import { OmmSchema } from "@/core/shared/omm/schemas";
-import { checkIntegrity, validate } from "@/core/shared/omm/validation";
-import { type Result, err, ok } from "../../shared/result";
-import { writeSnapshot } from "../store/blob-store";
-import { fetchCelesTrakData } from "./fetch";
-import { parseCsv } from "./parse";
+import 'server-only';
+import type { RefreshError } from '../errors';
+import type { Snapshot } from '../../shared/omm/snapshot';
+import { OmmSchema } from '@/core/shared/omm/schemas';
+import { checkIntegrity, validate } from '@/core/shared/omm/validation';
+import { type Result, err, ok } from '../../shared/result';
+import { writeSnapshot } from '../store/blob-store';
+import { fetchCelesTrakData } from './fetch';
+import { parseCsv } from './parse';
 
 export async function refreshSnapshot(): Promise<
     Result<
@@ -20,8 +20,8 @@ export async function refreshSnapshot(): Promise<
         csv = await fetchCelesTrakData();
     } catch (cause) {
         return err({
-            kind: "upstream_failed",
-            message: cause instanceof Error ? cause.message : "unknown",
+            kind: 'upstream_failed',
+            message: cause instanceof Error ? cause.message : 'unknown',
         });
     }
 
