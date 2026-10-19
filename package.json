@@ -1,33 +1,35 @@
 {
-  "name": "sat-tracker",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@vercel/blob": "^2.8.1",
-    "@vercel/config": "^0.12.0",
-    "next": "16.4.0",
-    "papaparse": "^5.7.0",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "satellite.js": "^7.1.0",
-    "server-only": "^0.0.1",
-    "zod": "^4.6.6"
-  },
-  "devDependencies": {
-    "@types/node": "^26",
-    "@types/papaparse": "^5.5.2",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^10",
-    "eslint-config-next": "16.4.0",
-    "typescript": "^7"
-  },
-  "packageManager": "pnpm@12.11.2"
+    "name": "sat-tracker",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint"
+    },
+    "dependencies": {
+        "@vercel/blob": "^2.8.1",
+        "@vercel/config": "^0.12.0",
+        "next": "16.4.0",
+        "papaparse": "^5.7.0",
+        "react": "19.3.0",
+        "react-dom": "19.3.0",
+        "satellite.js": "^7.1.0",
+        "server-only": "^0.0.1",
+        "zod": "^4.6.6"
+    },
+    "devDependencies": {
+        "@types/node": "^26",
+        "@types/papaparse": "^5.5.2",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "@typescript/native": "npm:typescript@^7.0.2",
+        "babel-plugin-react-compiler": "1.0.0",
+        "eslint": "^10",
+        "eslint-config-next": "16.4.0",
+        "eslint-plugin-perfectionist": "^5.12.1",
+        "typescript": "npm:@typescript/typescript6@^6.0.2"
+    },
+    "packageManager": "pnpm@12.11.2"
 }
