@@ -2,33 +2,11 @@ import { ISSUES_MAX, SNAPSHOT_FETCH_TIMEOUT_MS } from '@/core/shared/constants';
 import { SnapshotEnvelopeSchema } from '@/core/shared/omm/schemas';
 import { checkIntegrity, validate } from '@/core/shared/omm/validation';
 import { type Result, err, ok } from '@/core/shared/result';
-import { type FetchError, type LoadedSnapshot, type SnapshotLoadError } from './protocol';
-
-async function fetchData(url: string): Promise<Result<string, FetchError>> {
-    try {
-        const response = await fetch(url, {
-            signal: AbortSignal.timeout(SNAPSHOT_FETCH_TIMEOUT_MS),
-        });
-
-        if (!response.ok) {
-            return err({
-                kind: 'fetch_error',
-                message: `HTTP ${response.status}`,
-            });
-        }
-
-        return ok(await response.text());
-    } catch (error) {
-        // error.name separates a TimeoutError from a network failure (TypeError).
-        return err({
-            kind: 'fetch_error',
-            message:
-                error instanceof Error
-                    ? `${error.name}: ${error.message}`
-                    : 'unknown error',
-        });
-    }
-}
+import {
+    type FetchError,
+    type LoadedSnapshot,
+    type SnapshotLoadError,
+} from './protocol';
 
 export async function loadSnapshot(
     url: string,
@@ -61,4 +39,30 @@ export async function loadSnapshot(
         droppedCount: checked.value.droppedCount,
         fetchedAtMs: envelope.data.fetchedAtMs,
     });
+}
+
+async function fetchData(url: string): Promise<Result<string, FetchError>> {
+    try {
+        const response = await fetch(url, {
+            signal: AbortSignal.timeout(SNAPSHOT_FETCH_TIMEOUT_MS),
+        });
+
+        if (!response.ok) {
+            return err({
+                kind: 'fetch_error',
+                message: `HTTP ${response.status}`,
+            });
+        }
+
+        return ok(await response.text());
+    } catch (error) {
+        // error.name separates a TimeoutError from a network failure (TypeError).
+        return err({
+            kind: 'fetch_error',
+            message:
+                error instanceof Error
+                    ? `${error.name}: ${error.message}`
+                    : 'unknown error',
+        });
+    }
 }
