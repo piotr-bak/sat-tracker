@@ -1,6 +1,6 @@
 import 'server-only';
+import type { Snapshot } from '../../shared/omm/schemas';
 import type { RefreshError } from '../errors';
-import type { Snapshot } from '../../shared/omm/snapshot';
 import { OmmSchema } from '@/core/shared/omm/schemas';
 import { checkIntegrity, validate } from '@/core/shared/omm/validation';
 import { type Result, err, ok } from '../../shared/result';
