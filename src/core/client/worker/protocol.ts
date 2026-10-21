@@ -9,8 +9,8 @@ export type ProcessedSatRecData = {
 };
 
 export type Frame = {
-    satPositions: Float32Array; // [longitude (deg), latitude (deg), altitude (m)] per satellite
-    visibilityMask: Uint8Array; // 1 = draw, 0 = hide
+    satPositions: Float32Array<ArrayBuffer>; // [longitude (deg), latitude (deg), altitude (m)] per satellite
+    visibilityMask: Uint8Array<ArrayBuffer>; // 1 = draw, 0 = hide
     failedPropagationCount: number;
 };
 
@@ -19,6 +19,41 @@ export type LoadedSnapshot = {
     readonly droppedCount: number;
     readonly fetchedAtMs: number;
 };
+
+export type InboundMessage =
+    | { readonly type: 'init'; readonly url: string }
+    | {
+          readonly type: 'tick';
+          readonly frameId: number;
+          readonly epochMs: number;
+      }
+    | { readonly type: 'select'; readonly index: number | null }
+    | {
+          readonly type: 'get_details';
+          readonly requestId: number;
+          readonly index: number;
+      };
+
+export type OutboundMessage =
+    | { readonly type: 'status'; readonly stage: 'loading' }
+    | {
+          readonly type: 'ready';
+          readonly count: number;
+          readonly invalidSatCount: number; // satrecs that failed to initialize
+          readonly droppedRowCount: number; // rows rejected by client-side validation
+          readonly fetchedAtMs: number;
+          readonly validSatIds: Int32Array<ArrayBuffer>;
+      }
+    | {
+          readonly type: 'frame';
+          readonly frameId: number;
+          readonly epochMs: number;
+          readonly positions: Float32Array<ArrayBuffer>;
+          readonly visibilityMask: Uint8Array<ArrayBuffer>;
+          readonly failedPropagationCount: number;
+          readonly computeMs: number;
+      }
+    | { readonly type: 'error'; readonly error: WorkerError };
 
 export type FetchError = {
     readonly kind: 'fetch_error';
@@ -34,3 +69,11 @@ export type SnapshotLoadError =
 export type SatRecProcessingError = {
     readonly message: string;
 };
+
+export type WorkerError =
+    | { readonly kind: 'load_failed'; readonly cause: SnapshotLoadError }
+    | { readonly kind: 'build_failed'; readonly cause: SatRecProcessingError }
+    | { readonly kind: 'not_ready' }
+    | { readonly kind: 'invalid_selection'; readonly index: number }
+    | { readonly kind: 'not_implemented'; readonly feature: string }
+    | { readonly kind: 'internal'; readonly message: string };
