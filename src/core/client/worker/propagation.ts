@@ -2,8 +2,8 @@ import type {
     Frame,
     ProcessedSatRecData,
     SatRecProcessingError,
-} from "./protocol";
-import type { OmmRecord } from "@/core/shared/omm/schemas";
+} from './protocol';
+import type { OmmRecord } from '@/core/shared/omm/schemas';
 import {
     type SatRec,
     degreesLat,
@@ -13,15 +13,15 @@ import {
     json2satrec,
     propagate,
     SatRecError,
-} from "satellite.js";
-import { type Result, err, ok } from "@/core/shared/result";
+} from 'satellite.js';
+import { type Result, err, ok } from '@/core/shared/result';
 
 export function buildSatelliteRecords(
     data: readonly OmmRecord[],
 ): Result<ProcessedSatRecData, SatRecProcessingError> {
     if (data.length === 0) {
         return err({
-            message: "[PROCESSOR WORKER] No OMM satellite data provided.",
+            message: '[PROCESSOR WORKER] No OMM satellite data provided.',
         });
     }
 
@@ -38,7 +38,7 @@ export function buildSatelliteRecords(
     }
 
     if (satRecData.length === 0) {
-        return err({ message: "[PROCESSOR WORKER] Zero valid satellites." });
+        return err({ message: '[PROCESSOR WORKER] Zero valid satellites.' });
     }
 
     const invalidSatCount = data.length - satRecData.length;
@@ -79,7 +79,7 @@ export function computeFrame(
 
         const positionGd = eciToGeodetic(positionAndVelocity.position, gmst);
 
-        // eciToGeodetic returns radians and kilometres; deck.gl wants degrees and metres.
+        // eciToGeodetic returns radians and kilometres; deck.gl wants degrees and metres
         const offset = i * 3;
         satPositions[offset] = degreesLong(positionGd.longitude);
         satPositions[offset + 1] = degreesLat(positionGd.latitude);
