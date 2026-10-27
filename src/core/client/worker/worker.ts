@@ -2,16 +2,12 @@ import { assert, assertNever } from '@/core/shared/assert';
 import { buildSatelliteRecords, computeFrame } from './propagation';
 import type {
     InboundMessage,
+    InboundMsgOf,
     OutboundMessage,
     ProcessedSatRecData,
     WorkerError,
 } from './protocol';
 import { loadSnapshot } from './snapshot-loader';
-
-type InboundMsgOf<K extends InboundMessage['type']> = Extract<
-    InboundMessage,
-    { type: K }
->;
 
 type WorkerState =
     | { status: 'idle' }
@@ -19,7 +15,7 @@ type WorkerState =
     | {
           status: 'ready';
           data: ProcessedSatRecData;
-          selectedIndex: number | null;
+          selectedIndex: number | undefined;
       }
     | { status: 'failed'; error: WorkerError };
 
@@ -52,7 +48,7 @@ async function handleInit(message: InboundMsgOf<'init'>): Promise<void> {
         return;
     }
 
-    state = { status: 'ready', data: built.value, selectedIndex: null };
+    state = { status: 'ready', data: built.value, selectedIndex: undefined };
 
     // Transferring detaches the array it sends sp the main thread gets a copy and the worker keeps the original
     const idsForMainThread = built.value.validSatIds.slice();
@@ -109,7 +105,7 @@ function handleSelect(message: InboundMsgOf<'select'>): void {
     }
     const { index } = message;
     const isValidIndex =
-        index === null ||
+        index === undefined ||
         (Number.isInteger(index) &&
             index >= 0 &&
             index < state.data.satRecData.length);

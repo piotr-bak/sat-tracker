@@ -27,12 +27,17 @@ export type InboundMessage =
           readonly frameId: number;
           readonly epochMs: number;
       }
-    | { readonly type: 'select'; readonly index: number | null }
+    | { readonly type: 'select'; readonly index: number | undefined }
     | {
           readonly type: 'get_details';
           readonly requestId: number;
           readonly index: number;
       };
+
+export type InboundMsgOf<K extends InboundMessage['type']> = Extract<
+    InboundMessage,
+    { type: K }
+>;
 
 export type OutboundMessage =
     | { readonly type: 'status'; readonly stage: 'loading' }
@@ -54,6 +59,11 @@ export type OutboundMessage =
           readonly computeMs: number;
       }
     | { readonly type: 'error'; readonly error: WorkerError };
+
+export type OutboundMsgOf<K extends OutboundMessage['type']> = Extract<
+    OutboundMessage,
+    { type: K }
+>;
 
 export type FetchError = {
     readonly kind: 'fetch_error';
