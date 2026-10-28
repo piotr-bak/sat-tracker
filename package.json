@@ -9,6 +9,9 @@
         "lint": "eslint"
     },
     "dependencies": {
+        "@deck.gl/core": "^9.4.0",
+        "@deck.gl/maplibre": "^9.4.0",
+        "@deck.gl/react": "^9.4.0",
         "@vercel/blob": "^2.8.2",
         "@vercel/config": "^0.12.0",
         "next": "16.4.2",
