@@ -2,6 +2,8 @@ import 'server-only';
 import { readFile } from 'node:fs/promises';
 import { FETCH_TIMEOUT_MS } from '@/core/shared/constants';
 
+const CELESTRAK_BASE_URL = 'https://celestrak.org/NORAD/elements/gp.php';
+
 export async function fetchCelesTrakData(): Promise<string> {
     // Prevent local runs from calling the real CelesTrak endpoint
     if (process.env.VERCEL_ENV !== 'production') {
@@ -11,7 +13,7 @@ export async function fetchCelesTrakData(): Promise<string> {
         );
     }
 
-    const baseUrl = process.env.CELESTRAK_BASE_URL;
+    const baseUrl = CELESTRAK_BASE_URL;
 
     if (!baseUrl) {
         throw new Error(
