@@ -13,6 +13,7 @@ export class SatelliteClient {
     readonly #frameListeners = new Set<Listener<OutboundMsgOf<'frame'>>>();
     readonly #readyListeners = new Set<Listener<OutboundMsgOf<'ready'>>>();
     readonly #errorListeners = new Set<Listener<OutboundMsgOf<'error'>>>();
+    readonly #dataSnapshotUrl: string | undefined = undefined;
     #lastReady: OutboundMsgOf<'ready'> | undefined;
     #frameId = 0;
     #rafId: number | undefined = undefined;
@@ -21,11 +22,12 @@ export class SatelliteClient {
     #isDisposed = false;
     #inFlight = false;
 
-    constructor() {
+    constructor(snapshotUrl: string) {
         this.#worker = new Worker(
             new URL('./worker/worker.ts', import.meta.url),
             { type: 'module' },
         );
+        this.#dataSnapshotUrl = snapshotUrl;
         this.#worker.onmessage = (e: MessageEvent<OutboundMessage>) =>
             this.#handleWorkerMessage(e);
         this.#worker.onerror = (e: ErrorEvent) => this.#handleWorkerError(e);
@@ -125,10 +127,11 @@ export class SatelliteClient {
         });
     };
 
-    start(snapshotUrl: string) {
+    start() {
         if (this.#isDisposed) return;
         if (this.#isInitSent) return;
-        this.#post({ type: 'init', url: snapshotUrl });
+        if (!this.#dataSnapshotUrl) return;
+        this.#post({ type: 'init', url: this.#dataSnapshotUrl });
         this.#isInitSent = true;
     }
 
