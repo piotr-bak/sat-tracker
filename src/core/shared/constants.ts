@@ -5,3 +5,5 @@ export const FETCH_TIMEOUT_MS = 30_000;
 export const SNAPSHOT_FETCH_TIMEOUT_MS = 60_000;
 export const ISSUES_MAX = 5;
 export const REFRESH_RATE_MS = 100;
+export const SNAPSHOT_ENDPOINT = '/api/snapshot';
+export const REDIRECT_CACHE_SECONDS = 3600;
