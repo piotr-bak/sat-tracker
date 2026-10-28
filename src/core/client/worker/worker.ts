@@ -50,7 +50,7 @@ async function handleInit(message: InboundMsgOf<'init'>): Promise<void> {
 
     state = { status: 'ready', data: built.value, selectedIndex: undefined };
 
-    // Transferring detaches the array it sends sp the main thread gets a copy and the worker keeps the original
+    // Transferring detaches the array it sends so the main thread gets a copy and the worker keeps the original
     const idsForMainThread = built.value.validSatIds.slice();
     send(
         {
