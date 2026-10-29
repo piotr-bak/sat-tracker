@@ -1,3 +1,4 @@
+'use client';
 import './worker-setup';
 import { ReactNode } from 'react';
 import styles from './Scene.module.scss';
