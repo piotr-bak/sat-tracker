@@ -1,14 +1,7 @@
 'use client';
 import { Map } from '@vis.gl/react-maplibre';
-import { setWorkerUrl, StyleSpecification } from 'maplibre-gl';
+import { StyleSpecification } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-
-setWorkerUrl(
-    new URL(
-        'maplibre-gl/dist/maplibre-gl-worker.mjs',
-        import.meta.url,
-    ).toString(),
-);
 
 const eoxStyle: StyleSpecification = {
     version: 8,
@@ -36,15 +29,14 @@ export function Globe() {
     return (
         <Map
             initialViewState={{
-                longitude: -100,
-                latitude: 40,
-                zoom: 3.5,
+                longitude: 20.6,
+                latitude: 52.14,
+                zoom: 2,
             }}
             projection={'globe'}
             mapStyle={eoxStyle}
             minZoom={0}
-            zoom={2}
-            maxZoom={10}
+            maxZoom={3}
             style={{ width: '100%', height: '100%' }}
         />
     );
