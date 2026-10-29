@@ -25,13 +25,13 @@ const eoxStyle: StyleSpecification = {
     ],
 };
 
-export function Globe() {
+export function SatelliteMap() {
     return (
         <Map
             initialViewState={{
-                longitude: 20.6,
-                latitude: 52.14,
-                zoom: 2,
+                longitude: 14.42,
+                latitude: 50.08,
+                zoom: 1.25,
             }}
             projection={'globe'}
             mapStyle={eoxStyle}
