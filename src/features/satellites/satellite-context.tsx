@@ -1,6 +1,6 @@
 'use client';
 
-import { useSatelliteClient } from '@/core/client/hooks/use-satellite-client';
+import { useSatelliteClient } from './use-satellite-client';
 import { SatelliteClient } from '@/core/client/satellite-client';
 import { createContext, ReactNode, use } from 'react';
 

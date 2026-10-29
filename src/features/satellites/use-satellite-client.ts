@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { SatelliteClient } from '../satellite-client';
+import { SatelliteClient } from '@/core/client/satellite-client';
 import { SNAPSHOT_ENDPOINT } from '@/core/shared/constants';
 
 export function useSatelliteClient(): SatelliteClient | undefined {
