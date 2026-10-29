@@ -1,12 +1,12 @@
 import styles from './page.module.scss';
-import { Globe } from '../features/Globe/Globe';
-import { Scene } from '@/features/Scene/Scene';
+import { SatelliteMap } from '@/features/SatelliteMap';
+import { Scene } from '@/features/Scene';
 
 export default function Home() {
     return (
         <main id="root" className={styles.container}>
             <Scene>
-                <Globe />
+                <SatelliteMap />
             </Scene>
         </main>
     );
