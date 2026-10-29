@@ -2,6 +2,7 @@
 import { Map } from '@vis.gl/react-maplibre';
 import { StyleSpecification } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import { SatelliteLayers } from './SatelliteLayers';
 
 const eoxStyle: StyleSpecification = {
     version: 8,
@@ -36,8 +37,10 @@ export function SatelliteMap() {
             projection={'globe'}
             mapStyle={eoxStyle}
             minZoom={0}
-            maxZoom={3}
+            maxZoom={5}
             style={{ width: '100%', height: '100%' }}
-        />
+        >
+            <SatelliteLayers />
+        </Map>
     );
 }
