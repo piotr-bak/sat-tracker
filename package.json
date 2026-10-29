@@ -10,6 +10,9 @@
     },
     "dependencies": {
         "@deck.gl/core": "^9.4.0",
+        "@deck.gl/extensions": "^9.4.0",
+        "@deck.gl/geo-layers": "^9.4.0",
+        "@deck.gl/layers": "^9.4.0",
         "@deck.gl/maplibre": "^9.4.0",
         "@deck.gl/react": "^9.4.0",
         "@vercel/blob": "^2.8.2",
